@@ -1,0 +1,124 @@
+{
+	"info": {
+		"_postman_id": "43259d81-5a30-44b3-8aa1-d058ee0e4c18",
+		"name": "Pastee",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "31728440"
+	},
+	"item": [
+		{
+			"name": "pastee/get",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-Auth-Token",
+						"value": "u0VLi7IyvaqLgrwNwm9AZHHaWSM9fK126tNZ3BPvG",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"encrypted\":false,\"description\":\"test\",\"sections\":\r\n[{\"name\":\"Section1\",\"syntax\":\"autodetect\",\"contents\":\"Testing!\"}]}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://api.paste.ee/v1/pastes",
+					"protocol": "https",
+					"host": [
+						"api",
+						"paste",
+						"ee"
+					],
+					"path": [
+						"v1",
+						"pastes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "New Request",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X-Auth-Token",
+						"value": "u0VLi7IyvaqLgrwNwm9AZHHaWSM9fK126tNZ3BPvG",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{baseURL}}/{{user_id}}",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"{{user_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "New Request",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "X-Auth-Token",
+						"value": "u0VLi7IyvaqLgrwNwm9AZHHaWSM9fK126tNZ3BPvG",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{baseURL}}/{{user_id}}",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"{{user_id}}"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"let date = Date.now();",
+					"let contents = \"Testing in PM\" + date + \"token\";",
+					"pm.environment.set(\"env_content\", contents)"
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"pm.test(\"testing\", function() {",
+					"    let resp = pm.response.json();",
+					"    pm.environment.set(\"user_id\",resp.id)",
+					"})"
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseURL",
+			"value": "https://api.paste.ee/v1/pastes",
+			"type": "string"
+		}
+	]
+}
